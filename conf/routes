@@ -1,0 +1,16 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
+# ~~~~
+
+# Returns reading history
+GET      /history/:id      controllers.ReadingHistoryController.getHistory(id: String)
+
+# Adds book to reading history
+POST     /history/:id      controllers.ReadingHistoryController.addBook(id: String)
+
+# Removes book from reading history
+DELETE   /history/:id/:bookId      controllers.ReadingHistoryController.removeBook(id: String, bookId: String)
+
+# Creates a user in database
+POST      /user/:id      controllers.UserController.createUser(id: String)
