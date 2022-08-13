@@ -89,7 +89,7 @@ class ReadingHistoryController @Inject()(
             val authorsByRating = generateTop5Authors(history)
             val totalPages = generateTotalPages(history)
             val totals = Totals(history.size, totalPages, genresByRating.size, authorsByRating.size)
-            Insights(bookPages, booksByRating.take(5), genresByRating.take(5), authorsByRating.take(5), totals)
+            Insights(bookPages, booksByRating.take(5), genresByRating, authorsByRating.take(5), totals)
   }
 
   def generateTotalPages(history: List[ReadBook]) = { 
