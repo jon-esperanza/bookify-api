@@ -14,3 +14,21 @@ DELETE   /history/:id/:bookId      controllers.ReadingHistoryController.removeBo
 
 # Creates a user in database
 POST      /user/:id      controllers.UserController.createUser(id: String)
+
+# Returns collections for user
+GET      /collections/:id      controllers.CollectionsController.getCollections(id: String)
+
+# Creates collection for user
+POST     /collections/:id      controllers.CollectionsController.createCollection(id: String)
+
+# Edits a collection for user
+PUT     /collections/:id     controllers.CollectionsController.editCollection(id: String)
+
+# Removes a collection from user
+DELETE      /collections/:id/:collectionId      controllers.CollectionsController.removeCollection(id: String, collectionId)
+
+# Adds a book to collection
+POST      /collections/:id/:collectionId      controllers.CollectionsController.addBook(id: String, collectionId)
+
+# Removes a book from collection
+DELETE      /collections/:id/:collectionId/:bookId      controllers.CollectionsController.removeBook(id: String, collectionId, bookId)
