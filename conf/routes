@@ -12,6 +12,9 @@ POST     /history/:id      controllers.ReadingHistoryController.addBook(id: Stri
 # Removes book from reading history
 DELETE   /history/:id/:bookId      controllers.ReadingHistoryController.removeBook(id: String, bookId: String)
 
+# Returns reading insights
+GET   /history/:id/insights    controllers.ReadingHistoryController.getInsightData(id: String)
+
 # Creates a user in database
 POST      /user/:id      controllers.UserController.createUser(id: String)
 
