@@ -1,6 +1,6 @@
 package controllers
 
-import models.{ReadBook, User, BookPageCount, GenreGroup, RatingTotal, GenreAvg, AuthorAvg, Insights, Totals}
+import models.{ReadBook, User, BookPageCount, RatingTotal, GenreAvg, AuthorAvg, Insights, Totals}
 import java.util.Calendar
 import play.api.libs.json.JsResult.Exception
 import play.api.libs.json._
