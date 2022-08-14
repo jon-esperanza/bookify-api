@@ -49,7 +49,7 @@ object Totals {
 
 
 case class Insights(
-                var bookPageYTD: Map[String, BookPageCount] = Map.empty(),
+                var bookPageYTD: Map[String, BookPageCount] = Map[String,BookPageCount](),
                 var top5Books: List[ReadBook] = List(),
                 var top5Genres: List[GenreAvg] = List(),
                 var top5Authors: List[AuthorAvg] = List(),
