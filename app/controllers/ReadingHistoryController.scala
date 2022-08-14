@@ -83,17 +83,13 @@ class ReadingHistoryController @Inject()(
   }
 
   def generateInsights(history: List[ReadBook]) = {
-    if (history.length > 0) {
-            val bookPages = generateBookAndPage(history)
-            val booksByRating = generateTop5Books(history)
-            val genresByRating = generateTop5Genres(history)
-            val authorsByRating = generateTop5Authors(history)
-            val totalPages = generateTotalPages(history)
-            val totals = Totals(history.size, totalPages, genresByRating.size, authorsByRating.size)
-            Insights(bookPages, booksByRating.take(5), genresByRating.take(8), authorsByRating.take(5), totals)
-    } else {
-      Insights()
-    }
+      val bookPages = generateBookAndPage(history)
+      val booksByRating = generateTop5Books(history)
+      val genresByRating = generateTop5Genres(history)
+      val authorsByRating = generateTop5Authors(history)
+      val totalPages = generateTotalPages(history)
+      val totals = Totals(history.size, totalPages, genresByRating.size, authorsByRating.size)
+      Insights(bookPages, booksByRating.take(5), genresByRating.take(8), authorsByRating.take(5), totals)
   }
 
   def generateTotalPages(history: List[ReadBook]) = { 
@@ -147,17 +143,20 @@ class ReadingHistoryController @Inject()(
 
   def generateBookAndPage(history: List[ReadBook]) = {
     var months = scala.collection.mutable.Map[String, BookPageCount]()
+    var currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1
+    var lastYear = Calendar.getInstance().get(Calendar.YEAR) - 1
     history.map(book => {
       var parsed = book.dateCompleted.split("-")
-      var formatted = formatMonthYear(parsed(1), parsed(0))
-      if (!months.contains(formatted)) {
-        months.put(formatted, BookPageCount());
+      if (parsed(0).toInt > lastYear || ((parsed(0).toInt == lastYear) && parsed(1).toInt > currentMonth)) {
+        var formatted = formatMonthYear(parsed(1), parsed(0))
+        if (!months.contains(formatted)) {
+          months.put(formatted, BookPageCount());
+        }
+        var count = months.get(formatted).get
+        count.books = count.books + 1
+        count.pages = count.pages + book.pages
       }
-      var count = months.get(formatted).get
-      count.books = count.books + 1
-      count.pages = count.pages + book.pages
     })
-    var currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1
     var currentYear = Calendar.getInstance().get(Calendar.YEAR)
     var index = 12
     var current = formatMonthYear(currentMonth.toString(), currentYear.toString());
