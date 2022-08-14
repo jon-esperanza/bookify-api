@@ -38,10 +38,10 @@ object AuthorAvg {
 }
 
 case class Totals(
-                var books: Int,
-                var pages: Int,
-                var genres: Int,
-                var authors: Int
+                var books: Int = 0,
+                var pages: Int = 0,
+                var genres: Int = 0,
+                var authors: Int = 0
 )
 object Totals {
   implicit val fmt: Format[Totals] = Json.format[Totals]
@@ -49,11 +49,11 @@ object Totals {
 
 
 case class Insights(
-                var bookPageYTD: Map[String, BookPageCount],
-                var top5Books: List[ReadBook],
-                var top5Genres: List[GenreAvg],
-                var top5Authors: List[AuthorAvg],
-                var totals: Totals
+                var bookPageYTD: Map[String, BookPageCount] = Map.empty(),
+                var top5Books: List[ReadBook] = List(),
+                var top5Genres: List[GenreAvg] = List(),
+                var top5Authors: List[AuthorAvg] = List(),
+                var totals: Totals = Totals()
 )
 object Insights {
   implicit val fmt: Format[Insights] = Json.format[Insights]
