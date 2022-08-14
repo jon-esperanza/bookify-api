@@ -83,6 +83,7 @@ class ReadingHistoryController @Inject()(
   }
 
   def generateInsights(history: List[ReadBook]) = {
+    if (history.length) {
             val bookPages = generateBookAndPage(history)
             val booksByRating = generateTop5Books(history)
             val genresByRating = generateTop5Genres(history)
@@ -90,6 +91,9 @@ class ReadingHistoryController @Inject()(
             val totalPages = generateTotalPages(history)
             val totals = Totals(history.size, totalPages, genresByRating.size, authorsByRating.size)
             Insights(bookPages, booksByRating.take(5), genresByRating.take(8), authorsByRating.take(5), totals)
+    } else {
+      Insights(List(), List(), List(), List(), List, List(), Totals())
+    }
   }
 
   def generateTotalPages(history: List[ReadBook]) = { 
